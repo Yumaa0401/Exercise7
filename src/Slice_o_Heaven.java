@@ -20,6 +20,7 @@ public class Slice_o_Heaven {
     public static final String DEF_PIZZA_INGREDIENTS = "Mozzarella Cheese";
     public static final double DEF_ORDER_TOTAL = 15.00;
     public static final long BLACKLISTED_NUMBER = 12345678901234L;
+    Scanner scanner = new Scanner(System.in);
 
     public Slice_o_Heaven() {
         this.orderID = DEF_ORDER_ID;
@@ -49,7 +50,6 @@ public class Slice_o_Heaven {
     }
 
     public void takeOrder() {
-        Scanner scanner = new Scanner(System.in);
         String ing1, ing2, ing3;
         int ingChoice1 = 0, ingChoice2 = 0, ingChoice3 = 0;
         boolean validIngredients = false;
@@ -256,8 +256,13 @@ public class Slice_o_Heaven {
         } else {
             makeCardPayment();
         }
+    
+    
         System.out.println(this);
+        scanner.close();
+    
     }
+
 
     public void makePizza() {
         System.out.println("Making pizza with " + pizzaIngredients);
@@ -292,7 +297,6 @@ public class Slice_o_Heaven {
         int cardLength = cardStr.length();
         while (cardLength != 14 || cardNumber == BLACKLISTED_NUMBER) {
             System.out.println("Invalid card number. Please enter a 14 - digit non - blacklisted card number:");
-            Scanner scanner = new Scanner(System.in);
             cardNumber = scanner.nextLong();
             cardStr = Long.toString(cardNumber);
             cardLength = cardStr.length();
@@ -337,7 +341,6 @@ public class Slice_o_Heaven {
     }
 
     public void isItYourBirthday() {
-        Scanner scanner = new Scanner(System.in);
         SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy");
         Date birthdate = null;
         boolean validDate = false;
@@ -413,35 +416,6 @@ public class Slice_o_Heaven {
         int cvv = scanner.nextInt();
         processCardPayment(cardNumber, expiryDate, cvv);
     }
-
-    public static void main(String[] args) {
-        Slice_o_Heaven pizzeria = new Slice_o_Heaven("Slice - o - Heaven", "***City", "12345678@qq.com", 123456789L, "***");
-        pizzeria.pizzaPrice = 10.0;
-        pizzeria.takeOrder();
-        pizzeria.specialOfTheDay("111", "Coke", "$10.00");
-    }
+  
 }
 
-class UserAuthentication {
-
-    private String username = "SuperUser";
-    private String suppliedUsername;
-
-    public UserAuthentication(String username) {
-        suppliedUsername = username;
-    }
-
-    public void authenticate() {
-        if (suppliedUsername.equals(username)) {
-            System.out.println("Username already exists. Choose a different username.");
-        } else {
-            System.out.println("A new user has been created with the username " + suppliedUsername);
-        }
-
-        if (suppliedUsername == username) {
-            System.out.println("Same memory location");
-        } else {
-            System.out.println("Different memory location");
-        }
-    }
-}
